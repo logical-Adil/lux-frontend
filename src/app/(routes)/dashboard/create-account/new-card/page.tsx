@@ -1,4 +1,16 @@
-import React from 'react';
+import React from "react";
+import Image from "next/image";
+import creditCardImage from "@/../public/creditcard-image.png";
+import checkImage from "@/../public/check-image.png";
+import arrowImage from "@/../public/arrow-image.png";
+
+const featureList = [
+  { id: 1, text: "Set up cost 5000USDT", image: checkImage },
+  { id: 2, text: "Unlimited upload limit per month", image: checkImage },
+  { id: 3, text: "4% upload fee", image: checkImage },
+  { id: 4, text: "0.75% ATM withdrawal fee", image: checkImage },
+  { id: 5, text: "Limited availability", image: arrowImage },
+];
 
 const NewCard = () => {
   return (
@@ -12,47 +24,52 @@ const NewCard = () => {
         linear-gradient(180deg, #1D1D1D 0%, #292929 100%),
         linear-gradient(180deg, #073E3A 0%, #052725 100%),
         linear-gradient(180deg, #1D1D1D 0%, #292929 100%)`,
-          boxShadow: '0px 0px 20px 0px #00000066',
+          boxShadow: "0px 0px 20px 0px #00000066",
         }}
       >
-        <div className="flex flex-col md:flex-row gap-8 text-white">
+        <div className="flex flex-col md:flex-row justify-between gap-6 text-white">
           {/* Left Column - Card Image */}
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold mb-8">Your New Lux Metallic Card</h2>
-            <div className="w-full h-64 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center">
-              {/* Replace this with your actual card image */}
-              <span className="text-gray-400">Card Image Here</span>
+          {/* <div className="flex-1 border border-red-500  flex flex-col items-center justify-center gap-10"> */}
+          <div className="flex-1">
+            <div className=" mx-auto flex flex-col gap-25 max-w-[520px]">
+              <h2 className="text-[35px] font-light leading-[100%] tracking-[-2.5%] z-10">
+                Your New{" "}
+                <span className="font-semibold">Lux Metallic Card</span>
+              </h2>
+
+              {/* Image Container with aspect ratio */}
+              <div className="w-full h-[80%] overflow-hidden">
+                <Image src={creditCardImage} alt="card-image" className="" />
+              </div>
             </div>
           </div>
 
           {/* Right Column - Specifications */}
-          <div className="md:w-1/2 flex flex-col">
-            <h3 className="text-xl font-semibold mb-6 self-end">Card Specifications</h3>
-            <ul className="space-y-4 text-right self-end">
-              <li className="flex justify-end items-center">
-                <span className="mr-2">-</span>
-                <span>Set up cost 5000USDT</span>
-              </li>
-              <li className="flex justify-end items-center">
-                <span className="mr-2">-</span>
-                <span>Unlimited upload limit per month</span>
-              </li>
-              <li className="flex justify-end items-center">
-                <span className="mr-2">-</span>
-                <span>4% upload fee</span>
-              </li>
-              <li className="flex justify-end items-center">
-                <span className="mr-2">-</span>
-                <span>0.75% ATM withdrawal fee</span>
-              </li>
-              <li className="flex justify-end items-center">
-                <span className="mr-2">-</span>
-                <span>Limited availability</span>
-              </li>
+          <div className=" lg:w-[30%] flex flex-col justify-center gap-6">
+            <h3 className="text-xl font-semibold mb-6">Card Specifications</h3>
+
+            <ul className="space-y-4 text-right w-full max-w-[300px]">
+              {featureList.map((item, index) => (
+                <li
+                  key={item.id}
+                  className={`flex items-center gap-3 justify-start ${
+                    featureList.length - 1 === index && "mt-8"
+                  }`}
+                >
+                  <Image
+                    src={item.image}
+                    alt="check-icon"
+                    className="w-4 h-4"
+                  />
+                  <span>{item.text}</span>
+                </li>
+              ))}
             </ul>
 
-            <div className="mt-12 self-end">
-              <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-8 rounded-full">Select card</button>
+            <div className="mt-12">
+              <button className="px-8 py-[2px] text-xs text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-xs font-semibold cursor-pointer">
+                Select Card
+              </button>
             </div>
           </div>
         </div>

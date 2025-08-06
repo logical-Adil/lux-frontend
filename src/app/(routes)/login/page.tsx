@@ -2,6 +2,7 @@ import { Logo } from '@/components/logo';
 import React from 'react';
 import LoginForm from './_components/form';
 import LargeLogo from '@/components/LargeLogo';
+import { Separator } from '@/components/ui/separator';
 
 const Login = () => {
   return (
@@ -14,9 +15,12 @@ const Login = () => {
           <Logo />
         </div>
         {/* div 2  */}
-        <div className="flex flex-col gap-12 max-w-[500px]">
-          <h1 className={`welcome-text text-8xl`}>Welcome</h1>
-          <p className="text-white text-center">Please signin to your Lux Metallic account</p>
+        <div className="flex flex-col gap-8 max-w-[500px]">
+          <h1 className={`welcome-text xl:text-[120px]`}>Welcome</h1>
+          <div className="opacity-50">
+            <Separator />
+          </div>
+          <p className="text-white text-center text-[25px] font-normal">Please signin to your Lux Metallic account</p>
         </div>
         {/* div 3  */}
         <div className="mr-15">

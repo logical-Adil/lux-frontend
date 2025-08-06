@@ -15,6 +15,7 @@ import { IoGridOutline } from 'react-icons/io5';
 import { IoCardOutline } from 'react-icons/io5';
 import { GrTransaction } from 'react-icons/gr';
 import { IconType } from 'react-icons';
+import { Separator } from '@/components/ui/separator';
 
 type NavLink = {
   href: string;
@@ -45,7 +46,7 @@ export default function Sidebar() {
   const activeImage = getActiveImage();
 
   return (
-    <aside className="w-60 h-screen bg-gradient-to-b from-[#0E0E0E] to-[#2C2C2C] text-white p-4 flex flex-col">
+    <aside className="w-60 h-screen border-r border-[var(--border-one)] bg-gradient-to-b from-[#0E0E0E] to-[#2C2C2C] text-white p-4 flex flex-col">
       {/* Logo */}
       <div className="py-9 px-[42px]">
         <Logo />
@@ -57,7 +58,12 @@ export default function Sidebar() {
         <ul className="space-y-2 ">
           {links.slice(0, 3).map(({ href, label, icon: Icon }) => (
             <li key={href}>
-              <Link href={href} className={`flex items-center gap-2 p-2  pl-5 rounded ${activePath === href ? 'bg-[#B48450] font-semibold' : 'hover:bg-[#9a6f3c]'}`}>
+              <Link
+                href={href}
+                className={`flex items-center gap-2 p-2  pl-5 text-[var(--text-color)] rounded ${
+                  activePath === href && 'bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white font-semibold'
+                }`}
+              >
                 {Icon && <Icon size={20} />}
                 <span>{label}</span>
               </Link>
@@ -66,7 +72,7 @@ export default function Sidebar() {
         </ul>
 
         {/* Bottom Section */}
-        <div className="space-y-2">
+        <div className="space-y-5">
           {/* ✅ Image for active tab */}
           {activeImage && (
             <div className="px-2">
@@ -75,15 +81,17 @@ export default function Sidebar() {
           )}
 
           {/* Remaining link(s) without icons */}
-          <ul className="space-y-2">
+          <ul>
             {links.slice(3).map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} className={`block p-2 text-center rounded bg-[#B48450] font-semibold hover:bg-[#9a6f3c]`}>
+                <Link href={href} className={`block p-2 text-center bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded font-semibold`}>
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
+
+          <div className="border-t border-[var(--border-two)]" />
 
           {/* User Profile */}
           <UserProfile name="John Doe" avatarUrl={profileImage} />

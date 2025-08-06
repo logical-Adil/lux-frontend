@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@/components/button';
 import { transactionsData } from '@/constants';
 import { Table } from '@mantine/core';
 

@@ -3,7 +3,6 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation'; // ✅ Import router
-import Button from '@/components/button';
 
 const SignoutModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -18,7 +17,7 @@ const SignoutModal = () => {
 
   return (
     <div>
-      <button onClick={open} className="px-8 py-[2px] text-xs text-white bg-[#B48450] hover:bg-[#9a6f3c] rounded-xs font-semibold cursor-pointer">
+      <button onClick={open} className="px-8 py-[2px] text-xs text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-xs font-semibold cursor-pointer">
         Sign out
       </button>
 
@@ -58,7 +57,7 @@ const SignoutModal = () => {
             <h2 className="text-sm">Are you sure you want to sign out?</h2>
             <button
               onClick={handleSigout} // ✅ Call handleSigout here
-              className="w-full px-8 py-[4px] text-[8px] text-white bg-[#B48450] hover:bg-[#9a6f3c] rounded-xs cursor-pointer"
+              className="w-full px-8 py-[4px] text-[8px] text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-xs cursor-pointer"
             >
               Sign out
             </button>

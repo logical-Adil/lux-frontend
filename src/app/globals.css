@@ -43,7 +43,29 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+
+
 :root {
+  --white-color: #ffffff;
+  --black-color: #000;
+  --text-color: #707070;
+  --theme-color: #B48450; 
+  --theme-hover-color: #9a6f3c; 
+  --balancebar-bg-color: #282828;
+  --border-one: #8f8f8f; 
+  --border-two:  #C4CAD0;
+  --border-three: #707070;
+  --theme-green: #00FF11;
+  --theme-gray: #3A3A3A;
+  /* --theme-red: #FF2020; */
+  --theme-red: #FB4B4B;
+    
+
+
+
+
+  /* -------------------------- */
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -60,6 +82,7 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  /* --border: oklch(0.922 0 0); */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -129,21 +152,18 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            /* text-shadow: 
+            text-shadow: 
                 0 1px 1px rgba(183, 138, 81, 0.3),
                 0 2px 3px rgba(183, 138, 81, 0.2),
-                0 4px 6px rgba(183, 138, 81, 0.1); */
+                0 4px 6px rgba(183, 138, 81, 0.1);
             position: relative;
             letter-spacing: 0.71px;
             line-height: 100%;
             text-align: center;
-             /* color: #B78A51; */
+             color: #B78A51;
           }
         
-
-
-
-        .welcome-text::after {
+        /* .welcome-text::after {
             content: '';
             position: absolute;
             left: 0;
@@ -152,4 +172,4 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, #D5BA91, transparent);
             opacity: 0.7;
-        }
+        } */

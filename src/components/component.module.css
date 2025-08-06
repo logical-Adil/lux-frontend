@@ -1,0 +1,11 @@
+
+.gradientBackground {
+  background: 
+    linear-gradient(0deg, #0F1113, #0F1113),
+    radial-gradient(
+      135.33% 135.33% at 5.71% -44.13%,
+      #303337 0%,
+      rgba(26, 26, 26, 0.27) 100%
+    ),
+    linear-gradient(0deg, #0E0E0E, #0E0E0E);
+}

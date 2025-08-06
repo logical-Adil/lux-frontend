@@ -92,18 +92,16 @@ const CreateAccountTable = () => {
       <div className="overflow-x-auto ">
         <table className="min-w-full divide-y divide-gray-200 ">
           <thead>
-            <div className="w-full border-2 border-[#707070] rounded-xl">
-              <tr className="">
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Transaction No.</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Currency</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">QTY</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">USD value</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">To wallet address</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Action</th>
-              </tr>
-            </div>
+            <tr className="border">
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Transaction No.</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Currency</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">QTY</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">USD value</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">To wallet address</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Type</th>
+              <th className="px-6 py-3 text-left text-xs font-medium  capitalize tracking-wider">Action</th>
+            </tr>
           </thead>
           <tbody>
             {transactions.map((transaction) => (

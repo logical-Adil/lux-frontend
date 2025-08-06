@@ -1,9 +1,12 @@
 'use client';
-import { Divider } from '@mantine/core';
+
 import { X } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaGoogle, FaApple, FaFacebookF } from 'react-icons/fa';
+// import thirdwebImage from '../../../../../public'
+import thirdwebImage from '@/../public/thirdweb.svg';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -42,9 +45,9 @@ const LoginForm = () => {
 
       {/* Divider */}
       <div className="flex items-center gap-4 text-sm my-8 font-semibold">
-        <div className="flex-1 h-px bg-white" />
-        <span>or sign in with:</span>
-        <div className="flex-1 h-px bg-white" />
+        <div className="flex-1 opacity-70 h-px bg-white" />
+        <span className="text-xl font-normal">or sign in with:</span>
+        <div className="flex-1 opacity-70 h-px bg-white" />
       </div>
 
       {/* Social Buttons */}
@@ -53,21 +56,23 @@ const LoginForm = () => {
           <div className="text-center">
             <FaGoogle className="text-white w-5 h-5" />
           </div>
-          <h3 className="text-center  w-full border-l">Google</h3>
+          <h3 className="text-center w-[80%] border-l">Google</h3>
         </button>
         <button className="flex items-center space-x-7 w-full h-10 bg-[#A0A0A0] hover:bg-[#8e8e8e] rounded-md px-4 font-medium transition cursor-pointer">
           <div className="text-center">
             <FaApple className="text-white w-5 h-5" />
           </div>
-          <h3 className="text-center  w-full border-l">Apple</h3>
+          <h3 className="text-center w-[80%] border-l">Apple</h3>
         </button>
         <button className="flex items-center space-x-7 w-full h-10 bg-[#1877F2] hover:bg-[#1565c0] rounded-md px-4 font-medium transition cursor-pointer">
           <div className="text-center">
             <FaFacebookF className="text-white w-5 h-5" />
           </div>
-          <h3 className="text-center  w-full border-l">Facebook</h3>
+          <h3 className="text-center w-[80%] border-l">Facebook</h3>
         </button>
       </div>
+
+      <Image src={thirdwebImage} alt="thirdweb-image" className="absolute top-[584px] left-[28px] w-[132px] h-[33.38px]" />
     </div>
   );
 };

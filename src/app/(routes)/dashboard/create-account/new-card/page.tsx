@@ -28,7 +28,7 @@ const NewCard = () => {
           boxShadow: "0px 0px 20px 0px #00000066",
         }}
       >
-        <div className="flex flex-col md:flex-row justify-between gap-6 text-white">
+        <div className="flex flex-col xl:flex-row justify-between items-center flex-wrap gap-6 xl:gap-12 text-white">
           {/* Left Column - Card Image */}
           {/* <div className="flex-1 border border-red-500  flex flex-col items-center justify-center gap-10"> */}
           <div className="flex-1">
@@ -46,7 +46,7 @@ const NewCard = () => {
           </div>
 
           {/* Right Column - Specifications */}
-          <div className=" lg:w-[30%] flex flex-col justify-center gap-6">
+          <div className=" w-[50%] xl:w-[30%] flex flex-col justify-center gap-6">
             <h3 className="text-xl font-semibold mb-6">Card Specifications</h3>
 
             <ul className="space-y-4 text-right w-full max-w-[300px]">

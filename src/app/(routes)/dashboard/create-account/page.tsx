@@ -265,7 +265,7 @@ const CreateAccount = () => {
         const renderPayButton = () => {
           if (paymentStatus === "Processing") {
             return (
-              <button className="bg-gray-400 text-[var(--theme-gray)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+              <button className="bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
                 Pay <BiLoaderCircle className="animate-spin" />
               </button>
             );
@@ -303,7 +303,7 @@ const CreateAccount = () => {
         };
 
         return (
-          <div className="flex space-x-2">
+          <div className="flex justify-center space-x-2">
             {renderKycButton()}
             {renderPayButton()}
           </div>
@@ -311,9 +311,10 @@ const CreateAccount = () => {
       },
     },
   ];
-  const kycPendingStateFun = (row: Transaction) => {
-    console.log("🚀 ~ kycPendingStateFun ~ item:", row);
-  };
+
+  // const kycPendingStateFun = (row: Transaction) => {
+  //   console.log("🚀 ~ kycPendingStateFun ~ item:", row);
+  // };
 
   // const kycDeclinedStateFun = (row: Transaction) => {
   //   console.log("🚀 ~ kycDeclinedStateFun ~ item:", row);

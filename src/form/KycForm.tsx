@@ -1,10 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
+import { kycSchema, KycFormData } from "@/schemas/kyc.schema";
+// import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormField,
@@ -13,21 +13,12 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
-import { useState } from "react";
-import { kycSchema } from "@/schemas/kyc.schema";
+import { Select as MantineSelect } from "@mantine/core";
+import { labelFormatter } from "@/utils";
+import styles from "./form.module.css";
 
 export function KycForm() {
-  const form = useForm<z.infer<typeof kycSchema>>({
+  const form = useForm<KycFormData>({
     resolver: zodResolver(kycSchema),
     defaultValues: {
       firstName: "",
@@ -50,147 +41,275 @@ export function KycForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof kycSchema>) => {
+  const onSubmit = (values: KycFormData) => {
     console.log(values);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {/* Text Inputs */}
-        {[
-          ["firstName", "First Name"],
-          ["lastName", "Last Name"],
-          ["state", "State"],
-          ["address", "Address"],
-          ["city", "City"],
-        ].map(([name, label]) => (
-          <FormField
-            key={name}
-            control={form.control}
-            name={name as any}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{label}</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        ))}
+        <div
+          className={`${styles.scrollContainer} max-h-[500px] px-4 space-y-6 overflow-y-scroll`}
+        >
+          {/* Grid 1: firstName, lastName, gender, state, country, nationality */}
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+            {["firstName", "lastName", "state"].map((name) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name as keyof KycFormData}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{labelFormatter(name)}</FormLabel>
+                    <FormControl>
+                      <Input
+                        value={String(field.value || "")}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
 
-        {/* Number & Email Inputs */}
-        {[
-          ["emergencyContact", "Emergency Contact Number"],
-          ["zipCode", "Zip Code"],
-          ["phoneWithCode", "Phone with Country Code"],
-          ["email", "Email"],
-          ["passportNumber", "Passport Number"],
-        ].map(([name, label]) => (
-          <FormField
-            key={name}
-            control={form.control}
-            name={name as any}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{label}</FormLabel>
-                <FormControl>
-                  <Input
-                    type={name === "email" ? "email" : "number"}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        ))}
-
-        {/* Select Dropdowns */}
-        {[
-          ["gender", "Gender", ["Male", "Female", "Other"]],
-          ["country", "Country", ["Pakistan", "USA", "UK"]],
-          ["nationality", "Nationality", ["Pakistani", "American", "British"]],
-        ].map(([name, label, options]) => (
-          <FormField
-            key={name}
-            control={form.control}
-            name={name as any}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{label}</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+            {/* Gender Select */}
+            <Controller
+              control={form.control}
+              name="gender"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Gender</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder={`Select ${label}`} />
-                    </SelectTrigger>
+                    <MantineSelect
+                      // ------------------
+
+                      maxDropdownHeight={200}
+                      comboboxProps={{
+                        // background: "#fff",
+                        transitionProps: { transition: "pop", duration: 200 },
+                        dropdownPadding: 5,
+                        size: "sm",
+                      }}
+                      variant="filled"
+                      size="md"
+                      checkIconPosition="right"
+                      clearable
+                      // ------------------
+
+                      bg={"white"}
+                      data={["Male", "Female", "Other"]}
+                      placeholder="Select Gender"
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      error={fieldState.error?.message}
+                      styles={{
+                        input: {
+                          backgroundColor: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                        },
+                      }}
+                    />
                   </FormControl>
-                  <SelectContent>
-                    {(options as string[]).map((opt) => (
-                      <SelectItem key={opt} value={opt}>
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        ))}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        {/* Date Picker */}
-        <FormField
-          control={form.control}
-          name="birthday"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Birthday</FormLabel>
-              <FormControl>
-                <Calendar
-                  mode="single"
-                  selected={field.value}
-                  onSelect={field.onChange}
+            {/* Country Select */}
+            <Controller
+              control={form.control}
+              name="country"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Country</FormLabel>
+                  <FormControl>
+                    <MantineSelect
+                      bg={"white"}
+                      data={["Pakistan", "USA", "UK"]}
+                      placeholder="Select Country"
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      error={fieldState.error?.message}
+                      styles={{
+                        input: {
+                          backgroundColor: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                        },
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Nationality Select */}
+            <Controller
+              control={form.control}
+              name="nationality"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Nationality</FormLabel>
+                  <FormControl>
+                    <MantineSelect
+                      bg={"white"}
+                      data={["Pakistani", "American", "British"]}
+                      placeholder="Select Nationality"
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      error={fieldState.error?.message}
+                      styles={{
+                        input: {
+                          backgroundColor: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                        },
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Independent Field: Address */}
+          <div>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Input
+                      value={String(field.value || "")}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Grid 2: Remaining fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              "city",
+              "emergencyContact",
+              "zipCode",
+              "phoneWithCode",
+              "email",
+            ].map((name) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name as keyof KycFormData}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{labelFormatter(name)}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type={name === "email" ? "email" : "number"}
+                        value={String(field.value || "")}
+                        onChange={field.onChange}
+                        name={`no-autofill-${name}`}
+                        autoComplete="off"
+                        inputMode="numeric"
+                        autoCorrect="off"
+                        spellCheck="false"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+
+            {/* Birthday */}
+            <FormField
+              control={form.control}
+              name="birthday"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Birthday</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="date"
+                      value={field.value || ""}
+                      onChange={(e) => field.onChange(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {["passportNumber"].map((name) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name as keyof KycFormData}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{labelFormatter(name)}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type={name === "email" ? "email" : "number"}
+                        value={String(field.value || "")}
+                        onChange={field.onChange}
+                        name={`no-autofill-${name}`}
+                        autoComplete="off"
+                        inputMode="numeric"
+                        autoCorrect="off"
+                        spellCheck="false"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+
+            {/* File Inputs */}
+            {["selfieWithPassport", "passportFrontImage", "signImage"].map(
+              (name) => (
+                <FormField
+                  key={name}
+                  control={form.control}
+                  name={name as keyof KycFormData}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{labelFormatter(name)}</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* File Inputs */}
-        {[
-          ["selfieWithPassport", "Selfie with Passport"],
-          ["passportFrontImage", "Passport Front Image"],
-          ["signImage", "Sign Image"],
-        ].map(([name, label]) => (
-          <FormField
-            key={name}
-            control={form.control}
-            name={name as any}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{label}</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    onChange={(e) => field.onChange(e.target.files?.[0])}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              )
             )}
-          />
-        ))}
-
-        <Button type="submit" className="w-full">
+          </div>
+        </div>
+        <button
+          // disabled={loading}
+          type="submit"
+          className="mt-4 w-full py-[6px] text-[10px] text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] cursor-pointer"
+        >
           Submit
-        </Button>
+        </button>
+
+        {/* <Button type="submit" className="w-full">
+          Submit
+        </Button> */}
       </form>
     </Form>
   );

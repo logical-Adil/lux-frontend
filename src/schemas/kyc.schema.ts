@@ -26,7 +26,12 @@ export const kycSchema = z.object({
     .max(15)
     .refine((val) => /^[0-9]+$/.test(val), "Must be a valid number"),
   email: z.string().email(),
-  birthday: z.date({ required_error: "Birthday is required" }),
+  birthday: z
+    .string()
+    .min(1, { message: "Birthday is required" })
+    .refine((val) => !isNaN(Date.parse(val)), {
+      message: "Invalid date format",
+    }),
   passportNumber: z
     .string()
     .min(6, "Passport number too short")
@@ -36,3 +41,5 @@ export const kycSchema = z.object({
   passportFrontImage: z.instanceof(File, { message: "Required" }),
   signImage: z.instanceof(File, { message: "Required" }),
 });
+
+export type KycFormData = z.infer<typeof kycSchema>;

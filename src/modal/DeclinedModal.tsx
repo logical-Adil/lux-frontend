@@ -3,12 +3,14 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import { useRouter } from "next/navigation"; // ✅ Import router
+import { Textarea } from "@/components/ui/textarea";
+import { CloseIcon } from "@/icons";
 
-const SignoutModal = () => {
+const DeclinedModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter(); // ✅ Initialize router
 
-  const handleSigout = () => {
+  const handleClose = () => {
     // You can add any logout logic here (e.g., clearing tokens/localStorage)
 
     // Redirect to login page
@@ -19,9 +21,9 @@ const SignoutModal = () => {
     <div>
       <button
         onClick={open}
-        className="px-8 py-[2px] text-xs text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] font-semibold cursor-pointer"
+        className="bg-[var(--theme-red)] text-white px-8 py-2 rounded text-xs font-medium"
       >
-        Sign out
+        Declined
       </button>
 
       <Modal
@@ -43,7 +45,7 @@ const SignoutModal = () => {
         centered
       >
         <div
-          className="text-white flex flex-col justify-center p-12 w-full min-h-[260px] overflow-hidden"
+          className="text-white flex flex-col justify-center p-8 w-full min-h-[260px] overflow-hidden"
           style={{
             background: `
               radial-gradient(135.33% 135.33% at 5.71% -44.13%, #303337 0%, rgba(26, 26, 26, 0.27) 100%),
@@ -56,15 +58,28 @@ const SignoutModal = () => {
             boxShadow: "0px 0px 20px 0px #00000066",
           }}
         >
-          <div className="space-y-10">
-            <h2 className="text-[22px] text-center font-semibold leading-[100%] tracking-[0%]">
-              Are you sure you want to sign out?
-            </h2>
+          <div className="flex justify-end mb-2">
             <button
-              onClick={handleSigout} // ✅ Call handleSigout here
-              className="w-full px-8 py-[4px] text-[8px] text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] cursor-pointer"
+              onClick={() => close()}
+              className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white  p-1 transition-colors duration-200 focus:outline-none "
+              aria-label="Close"
             >
-              Sign out
+              <CloseIcon />
+            </button>
+          </div>
+          <div className="space-y-8 w-full max-w-[500px] mx-auto">
+            <h2 className="text-[22px] text-center font-semibold leading-[100%] tracking-[0%]">
+              KYC Unsuccessful.
+            </h2>
+            <p className="text-base font-normal text-center leading-[27px] tracking-[0%]">
+              Please reach out to us explaining the situation and we will <br />
+              respond as soon as possible to resolve the issue
+            </p>
+
+            <Textarea placeholder="Message" />
+
+            <button className="w-full px-8 py-[4px] text-[8px] text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] cursor-pointer">
+              Submit
             </button>
           </div>
         </div>
@@ -73,4 +88,4 @@ const SignoutModal = () => {
   );
 };
 
-export default SignoutModal;
+export default DeclinedModal;

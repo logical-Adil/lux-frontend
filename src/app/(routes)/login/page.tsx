@@ -1,10 +1,19 @@
-import { Logo } from '@/components/logo';
-import React from 'react';
-import LoginForm from './_components/form';
-import LargeLogo from '@/components/LargeLogo';
-import { Separator } from '@/components/ui/separator';
+"use client";
+
+import { Logo } from "@/components/logo";
+// import React, { useEffect } from "react";
+import LoginForm from "./_components/form";
+import LargeLogo from "@/components/LargeLogo";
+import { Separator } from "@/components/ui/separator";
+// import { useTheme } from "next-themes";
 
 const Login = () => {
+  // const { setTheme } = useTheme();
+
+  // useEffect(() => {
+  //   setTheme("dark");
+  // }, []);
+
   return (
     <div className="flex h-screen w-full">
       {/* Left Panel (714px) */}
@@ -20,7 +29,9 @@ const Login = () => {
           <div className="opacity-50">
             <Separator />
           </div>
-          <p className="text-white text-center text-[25px] font-normal">Please signin to your Lux Metallic account</p>
+          <p className="text-white text-center text-[25px] font-normal">
+            Please signin to your Lux Metallic account
+          </p>
         </div>
         {/* div 3  */}
         <div className="mr-15">

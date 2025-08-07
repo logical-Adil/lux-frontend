@@ -1,11 +1,16 @@
-import React from 'react';
-import { transactionsData } from '@/constants';
-import { Table } from '@mantine/core';
+import React from "react";
+import { transactionsData } from "@/constants";
+import { Table } from "@mantine/core";
 
 const TransactionsTable = () => {
   return (
     <div>
-      <Table horizontalSpacing="sm" verticalSpacing="sm" withRowBorders>
+      <Table
+        horizontalSpacing="sm"
+        className="text-black"
+        verticalSpacing="sm"
+        withRowBorders
+      >
         <thead>
           <tr>
             <th className="px-4 pb-5 text-left">Date / Time</th>

@@ -1,27 +1,18 @@
-"use client";
-
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
-import { useRouter } from "next/navigation"; // ✅ Import router
+import { CloseIcon } from "@/icons";
+import { KycForm } from "@/form/KycForm";
 
-const SignoutModal = () => {
+const KycModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const router = useRouter(); // ✅ Initialize router
-
-  const handleSigout = () => {
-    // You can add any logout logic here (e.g., clearing tokens/localStorage)
-
-    // Redirect to login page
-    router.push("/login");
-  };
 
   return (
     <div>
       <button
         onClick={open}
-        className="px-8 py-[2px] text-xs text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] font-semibold cursor-pointer"
+        className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium"
       >
-        Sign out
+        KYC
       </button>
 
       <Modal
@@ -39,11 +30,11 @@ const SignoutModal = () => {
         }}
         padding={0}
         radius="md"
-        size="lg"
+        size="xl"
         centered
       >
         <div
-          className="text-white flex flex-col justify-center p-12 w-full min-h-[260px] overflow-hidden"
+          className="text-white flex flex-col justify-center p-8 w-full min-h-[260px] overflow-hidden"
           style={{
             background: `
               radial-gradient(135.33% 135.33% at 5.71% -44.13%, #303337 0%, rgba(26, 26, 26, 0.27) 100%),
@@ -56,16 +47,21 @@ const SignoutModal = () => {
             boxShadow: "0px 0px 20px 0px #00000066",
           }}
         >
+          <div className="flex justify-end mb-2">
+            <button
+              onClick={() => close()}
+              className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white  p-1 transition-colors duration-200 focus:outline-none "
+              aria-label="Close"
+            >
+              <CloseIcon />
+            </button>
+          </div>
           <div className="space-y-10">
             <h2 className="text-[22px] text-center font-semibold leading-[100%] tracking-[0%]">
-              Are you sure you want to sign out?
+              Please fill in the following KYC requirements
             </h2>
-            <button
-              onClick={handleSigout} // ✅ Call handleSigout here
-              className="w-full px-8 py-[4px] text-[8px] text-white bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded-[5px] cursor-pointer"
-            >
-              Sign out
-            </button>
+
+            <KycForm />
           </div>
         </div>
       </Modal>
@@ -73,4 +69,4 @@ const SignoutModal = () => {
   );
 };
 
-export default SignoutModal;
+export default KycModal;

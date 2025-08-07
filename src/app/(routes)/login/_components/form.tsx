@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { X } from 'lucide-react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { FaGoogle, FaApple, FaFacebookF } from 'react-icons/fa';
+import { X } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FaGoogle, FaApple, FaFacebookF } from "react-icons/fa";
 // import thirdwebImage from '../../../../../public'
-import thirdwebImage from '@/../public/thirdweb.svg';
+import thirdwebImage from "@/../public/thirdweb.svg";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -20,9 +20,9 @@ const LoginForm = () => {
     const isAuthenticated = true;
 
     if (isAuthenticated) {
-      router.push('/dashboard');
+      router.push("/dashboard");
     } else {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
     setLoading(false);
   };
@@ -36,9 +36,16 @@ const LoginForm = () => {
 
       <div>
         {/* Email Input */}
-        <input type="email" placeholder="Email" className="w-full h-12 px-4 rounded-md bg-white text-black placeholder-gray-500 mb-8" />
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full h-12 px-4 rounded-[5px] bg-white text-black placeholder-gray-500 mb-8"
+        />
         {/* Sign In Button */}
-        <button onClick={handleLogin} className="w-full h-10 bg-[#B48450] hover:bg-[#9a6f3c] rounded-md font-semibold mb-8 transition cursor-pointer">
+        <button
+          onClick={handleLogin}
+          className="w-full h-10 bg-[#B48450] hover:bg-[#9a6f3c] rounded-[5px] font-semibold mb-8 transition cursor-pointer"
+        >
           Sign in
         </button>
       </div>
@@ -52,19 +59,19 @@ const LoginForm = () => {
 
       {/* Social Buttons */}
       <div className="space-y-8 mt-10">
-        <button className="flex items-center space-x-7 w-full h-10 bg-[#E24333] hover:bg-[#c9362a] rounded-md px-4 font-medium transition cursor-pointer">
+        <button className="flex items-center space-x-7 w-full h-10 bg-[#E24333] hover:bg-[#c9362a] rounded-[5px] px-4 font-medium transition cursor-pointer">
           <div className="text-center">
             <FaGoogle className="text-white w-5 h-5" />
           </div>
           <h3 className="text-center w-[80%] border-l">Google</h3>
         </button>
-        <button className="flex items-center space-x-7 w-full h-10 bg-[#A0A0A0] hover:bg-[#8e8e8e] rounded-md px-4 font-medium transition cursor-pointer">
+        <button className="flex items-center space-x-7 w-full h-10 bg-[#A0A0A0] hover:bg-[#8e8e8e] rounded-[5px] px-4 font-medium transition cursor-pointer">
           <div className="text-center">
             <FaApple className="text-white w-5 h-5" />
           </div>
           <h3 className="text-center w-[80%] border-l">Apple</h3>
         </button>
-        <button className="flex items-center space-x-7 w-full h-10 bg-[#1877F2] hover:bg-[#1565c0] rounded-md px-4 font-medium transition cursor-pointer">
+        <button className="flex items-center space-x-7 w-full h-10 bg-[#1877F2] hover:bg-[#1565c0] rounded-[5px] px-4 font-medium transition cursor-pointer">
           <div className="text-center">
             <FaFacebookF className="text-white w-5 h-5" />
           </div>
@@ -72,7 +79,11 @@ const LoginForm = () => {
         </button>
       </div>
 
-      <Image src={thirdwebImage} alt="thirdweb-image" className="absolute top-[584px] left-[28px] w-[132px] h-[33.38px]" />
+      <Image
+        src={thirdwebImage}
+        alt="thirdweb-image"
+        className="absolute top-[584px] left-[28px] w-[132px] h-[33.38px]"
+      />
     </div>
   );
 };

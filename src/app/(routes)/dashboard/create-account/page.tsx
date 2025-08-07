@@ -98,89 +98,105 @@ const data: Transaction[] = [
 ];
 
 // ✅ Table Columns
-const columns: ColumnDef<Transaction>[] = [
-  { accessorKey: 'transactionNo', header: 'Transaction No.' },
-  { accessorKey: 'currency', header: 'Currency' },
-  { accessorKey: 'qty', header: 'Qty' },
-  { accessorKey: 'usdValue', header: 'USD Value' },
-  { accessorKey: 'walletAddress', header: 'Wallet Address' },
-  { accessorKey: 'status', header: 'Status' },
-  { accessorKey: 'type', header: 'Type' },
-  {
-    header: 'Action',
-    cell: ({ row }) => {
-      const { kycStatus, paymentStatus } = row.original;
-
-      const renderKycButton = () => {
-        if (kycStatus === 'Processing') {
-          return (
-            <button className="bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
-              KYC <BiLoaderCircle className="animate-spin" />
-            </button>
-          );
-        }
-
-        if (kycStatus === 'Completed') {
-          return (
-            <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
-              KYC
-              <Check className="w-4 h-4" />
-            </button>
-          );
-        }
-
-        if (kycStatus === 'Pending') {
-          return <button className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">KYC</button>;
-        }
-
-        if (kycStatus === 'Declined') {
-          return <button className="bg-[var(--theme-red)] text-white px-10 py-2 rounded text-xs font-medium">Declined</button>;
-        }
-
-        return null;
-      };
-
-      const renderPayButton = () => {
-        if (paymentStatus === 'Processing') {
-          return (
-            <button className="bg-gray-400 text-[var(--theme-gray)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
-              Pay <BiLoaderCircle className="animate-spin" />
-            </button>
-          );
-        }
-
-        if (paymentStatus === 'Completed') {
-          return (
-            <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
-              Paid
-              <Check className="w-4 h-4" />
-            </button>
-          );
-        }
-
-        if (paymentStatus === 'Pending') {
-          return <button className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">Pay</button>;
-        }
-
-        if (paymentStatus === 'Declined') {
-          return <button className="bg-[var(--theme-red)] text-white px-10 py-2 rounded text-xs font-medium">Declined</button>;
-        }
-
-        return null;
-      };
-
-      return (
-        <div className="flex space-x-2">
-          {renderKycButton()}
-          {renderPayButton()}
-        </div>
-      );
-    },
-  },
-];
 
 // ✅ Main Component
 const CreateAccount = () => {
+  const columns: ColumnDef<Transaction>[] = [
+    { accessorKey: 'transactionNo', header: 'Transaction No.' },
+    { accessorKey: 'currency', header: 'Currency' },
+    { accessorKey: 'qty', header: 'Qty' },
+    { accessorKey: 'usdValue', header: 'USD Value' },
+    { accessorKey: 'walletAddress', header: 'Wallet Address' },
+    { accessorKey: 'status', header: 'Status' },
+    { accessorKey: 'type', header: 'Type' },
+    {
+      header: 'Action',
+      cell: ({ row }) => {
+        const { kycStatus, paymentStatus } = row.original;
+
+        const renderKycButton = () => {
+          if (kycStatus === 'Processing') {
+            return (
+              <button className="bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+                KYC <BiLoaderCircle className="animate-spin" />
+              </button>
+            );
+          }
+
+          if (kycStatus === 'Completed') {
+            return (
+              <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+                KYC
+                <Check className="w-4 h-4" />
+              </button>
+            );
+          }
+
+          if (kycStatus === 'Pending') {
+            return (
+              <button onClick={() => kycPendingStateFun(row.original)} className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">
+                KYC
+              </button>
+            );
+          }
+
+          if (kycStatus === 'Declined') {
+            return (
+              <button onClick={() => kycDeclinedStateFun(row.original)} className="bg-[var(--theme-red)] text-white px-10 py-2 rounded text-xs font-medium">
+                Declined
+              </button>
+            );
+          }
+
+          return null;
+        };
+
+        const renderPayButton = () => {
+          if (paymentStatus === 'Processing') {
+            return (
+              <button className="bg-gray-400 text-[var(--theme-gray)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+                Pay <BiLoaderCircle className="animate-spin" />
+              </button>
+            );
+          }
+
+          if (paymentStatus === 'Completed') {
+            return (
+              <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+                Paid
+                <Check className="w-4 h-4" />
+              </button>
+            );
+          }
+
+          if (paymentStatus === 'Pending') {
+            return <button className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">Pay</button>;
+          }
+
+          if (paymentStatus === 'Declined') {
+            return <button className="bg-[var(--theme-red)] text-white px-10 py-2 rounded text-xs font-medium">Declined</button>;
+          }
+
+          return null;
+        };
+
+        return (
+          <div className="flex space-x-2">
+            {renderKycButton()}
+            {renderPayButton()}
+          </div>
+        );
+      },
+    },
+  ];
+  const kycPendingStateFun = (row: Transaction) => {
+    console.log('🚀 ~ kycPendingStateFun ~ item:', row);
+  };
+
+  const kycDeclinedStateFun = (row: Transaction) => {
+    console.log('🚀 ~ kycDeclinedStateFun ~ item:', row);
+  };
+
   const [dataState, setDataState] = useState<Transaction[]>([]);
 
   useEffect(() => {

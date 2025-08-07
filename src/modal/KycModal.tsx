@@ -10,7 +10,7 @@ const KycModal = () => {
     <div>
       <button
         onClick={open}
-        className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium"
+        className="w-[123.83px] h-[40px] bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium"
       >
         KYC
       </button>

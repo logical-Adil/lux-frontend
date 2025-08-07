@@ -215,7 +215,7 @@ const CreateAccount = () => {
         const renderKycButton = () => {
           if (kycStatus === "Processing") {
             return (
-              <button className="bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+              <button className="w-[123.83px] h-[40px] bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
                 KYC <BiLoaderCircle className="animate-spin" />
               </button>
             );
@@ -223,7 +223,7 @@ const CreateAccount = () => {
 
           if (kycStatus === "Completed") {
             return (
-              <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+              <button className="w-[123.83px] h-[40px] border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
                 KYC
                 <Check className="w-4 h-4" />
               </button>
@@ -265,7 +265,7 @@ const CreateAccount = () => {
         const renderPayButton = () => {
           if (paymentStatus === "Processing") {
             return (
-              <button className="bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+              <button className="w-[123.83px] h-[40px] bg-gray-400 text-[var(--theme-gray)] px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
                 Pay <BiLoaderCircle className="animate-spin" />
               </button>
             );
@@ -273,7 +273,7 @@ const CreateAccount = () => {
 
           if (paymentStatus === "Completed") {
             return (
-              <button className="border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
+              <button className="w-[123.83px] h-[40px] border border-[var(--theme-green)] text-[var(--theme-green)]  px-10 py-2 rounded text-xs font-medium flex items-center gap-1">
                 Paid
                 <Check className="w-4 h-4" />
               </button>
@@ -282,7 +282,7 @@ const CreateAccount = () => {
 
           if (paymentStatus === "Pending") {
             return (
-              <button className=" bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">
+              <button className="w-[123.83px] h-[40px] bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white px-10 py-2 rounded text-xs font-medium">
                 Pay
               </button>
             );

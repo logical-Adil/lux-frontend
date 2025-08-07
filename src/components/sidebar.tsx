@@ -51,21 +51,21 @@ export default function Sidebar() {
   const activeImage = getActiveImage();
 
   return (
-    <aside className="w-60 h-screen border-r border-[var(--border-one)] bg-gradient-to-b from-[#0E0E0E] to-[#2C2C2C] text-white p-4 flex flex-col">
+    <aside className="w-[325px] py-6 px-[32px] h-screen border-r border-[var(--border-one)] bg-gradient-to-b from-[#0E0E0E] to-[#2C2C2C] text-white  flex flex-col">
       {/* Logo */}
-      <div className="py-9 px-[42px]">
+      <div className="w-[132px] h-[66px] mx-auto">
         <Logo />
       </div>
 
       {/* Sidebar NavLinks */}
-      <div className="flex flex-col justify-between flex-1">
+      <div className="flex flex-col justify-between flex-1 mt-12">
         {/* Top Links with Icons */}
-        <ul className="space-y-2 ">
+        <ul className="space-y-3">
           {links.slice(0, 3).map(({ href, label, icon: Icon }) => (
             <li key={href}>
               <Link
                 href={href}
-                className={`flex items-center gap-2 p-2  pl-5 text-[var(--text-color)] hover:text-white rounded ${
+                className={`flex items-center gap-2 w-[206px] mx-auto py-[10.51px] px-[14.01px] leading-[21.02px] text-lg text-[var(--text-color)] hover:text-white rounded ${
                   activePath === href &&
                   "bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] text-white font-semibold"
                 }`}
@@ -78,17 +78,16 @@ export default function Sidebar() {
         </ul>
 
         {/* Bottom Section */}
-        <div className="space-y-5">
+        <div className="space-y-8">
           {/* ✅ Image for active tab */}
           {activeImage && (
-            <div className="px-2">
+            <div className="">
               <Image
                 src={activeImage}
                 alt="Active Tab Image"
                 className="rounded"
-                width={200}
-                height={100}
-                priority
+                width={246}
+                height={246}
               />
             </div>
           )}
@@ -99,19 +98,20 @@ export default function Sidebar() {
               <li key={href}>
                 <Link
                   href={href}
-                  className={`block p-2 text-center bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded font-semibold`}
+                  className={`block p-2 w-[206px] mx-auto text-nowrap text-center  py-[10.51px] px-[14.01px] leading-[21.02px] text-lg bg-[var(--theme-color)] hover:bg-[var(--theme-hover-color)] rounded font-semibold`}
                 >
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
-
-          <div className="border-t border-[var(--border-two)]" />
-
-          {/* User Profile */}
-          <UserProfile name="John Doe" avatarUrl={profileImage} />
         </div>
+      </div>
+      <div className="mt-10 space-y-8">
+        <div className="w-[264px] border-t border-[var(--border-two)]" />
+
+        {/* User Profile */}
+        <UserProfile name="Name Surname" avatarUrl={profileImage} />
       </div>
     </aside>
   );
